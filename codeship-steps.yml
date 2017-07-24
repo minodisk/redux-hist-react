@@ -1,13 +1,13 @@
 - type: parallel
   steps:
-    - name: Lint redux-hist
-      service: redux-hist
+    - name: Lint
+      service: redux-hist-react
       command: npm run lint
-    - name: Test redux-hist
-      service: redux-hist
+    - name: Test
+      service: redux-hist-react
       command: npm test
 - type: parallel
   steps:
     - name: Report Coverage
-      service: redux-hist
+      service: redux-hist-react
       command: npm run codecov
