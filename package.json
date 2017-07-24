@@ -15,12 +15,11 @@
     "build": "./node_modules/.bin/tsc -p .",
     "pretest": "./node_modules/.bin/tsc --jsx react --outDir ./test-dist ./test/*.tsx",
     "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha ./test-dist/*.js",
-    "posttest": "nyc report --reporter=json && if [ \"$CI\" = \"true\" ]; then codecov -f coverage/*.json; fi",
-    "prepublishOnly": "npm run lint && npm run build && npm test"
+    "posttest": "nyc report --reporter=json && if [ \"$CI\" = \"true\" ]; then codecov -f coverage/*.json; fi"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/minodisk/redux-hist.git"
+    "url": "git+https://github.com/minodisk/redux-hist-react.git"
   },
   "keywords": [
     "component",
@@ -33,7 +32,7 @@
   "author": "Daisuke Mino",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/minodisk/redux-hist/issues"
+    "url": "https://github.com/minodisk/redux-hist-react/issues"
   },
   "homepage": "https://github.com/minodisk/redux-hist-react#readme",
   "dependencies": {
