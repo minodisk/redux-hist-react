@@ -1,0 +1,8 @@
+{
+  "extends": "tslint:latest",
+  "rules": {
+    "array-type": [true, "generic"],
+    "interface-name": false,
+    "object-literal-sort-keys": false
+  }
+}
