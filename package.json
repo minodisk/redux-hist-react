@@ -36,7 +36,7 @@
   "bugs": {
     "url": "https://github.com/minodisk/redux-hist/issues"
   },
-  "homepage": "https://github.com/minodisk/redux-hist/tree/master/packages/redux-hist-react#readme",
+  "homepage": "https://github.com/minodisk/redux-hist-react#readme",
   "dependencies": {
     "react": "^15.6.1",
     "react-redux": "^5.0.5",
