@@ -1,6 +1,6 @@
 {
   "name": "redux-hist-react",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "React Components for Redux around History API.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -15,7 +15,8 @@
     "build": "./node_modules/.bin/tsc -p .",
     "pretest": "./node_modules/.bin/tsc --jsx react --outDir ./test-dist ./test/*.tsx",
     "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha ./test-dist/*.js",
-    "posttest": "nyc report --reporter=json && if [ \"$CI\" = \"true\" ]; then codecov -f coverage/*.json; fi"
+    "posttest": "nyc report --reporter=json && if [ \"$CI\" = \"true\" ]; then codecov -f coverage/*.json; fi",
+    "update": "npm uninstall --save redux-hist && npm install --save redux-hist"
   },
   "repository": {
     "type": "git",
@@ -38,7 +39,7 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-redux": "^5.0.5",
-    "redux-hist": "0.0.8"
+    "redux-hist": "0.0.9"
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.4",

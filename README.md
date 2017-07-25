@@ -2,8 +2,15 @@
 
 React Components for Redux around History API.
 
-## React Components
+## Usage
 
-### `<Link>`
+## API Reference
 
-#### `to: string`
+### React Components
+
+#### `<Link>`
+##### `to: string`
+
+## Related package
+
+- [redux-hist](https://github.com/minodisk/redux-hist)
