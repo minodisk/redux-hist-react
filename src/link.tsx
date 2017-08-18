@@ -1,61 +1,50 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {push} from "redux-hist";
+import * as hist from "redux-hist";
 
-export interface LinkProps {
-  className?: string;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+export interface AnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   push?: (pathname: string) => void;
-  style?: any;
-  target?: string;
-  to: string;
 }
 
-class LinkBase extends React.Component<LinkProps, {}> {
+class AnchorBase extends React.Component<AnchorProps, {}> {
   public render() {
+    const {
+      push,
+      onClick,
+      ...props,
+    } = this.props;
     return (
       <a
-        className={this.props.className}
-        onClick={this.onClick}
-        style={this.props.style}
-        target={this.props.target}
-        href={this.props.to}
-      >
-        {
-          this.props.children
-        }
-      </a>
+        onClick={(onClick != null) ? onClick : this.onClick}
+        {...props}
+      >{this.props.children}</a>
     );
   }
 
   private onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (this.props.onClick != null) {
-      this.props.onClick(e);
-    }
-
     if (
+      this.props.target ||
       e.defaultPrevented ||
       e.button > 0 ||
-      this.props.target ||
-      e.metaKey ||
       e.altKey ||
       e.ctrlKey ||
-      e.shiftKey
+      e.shiftKey ||
+      e.metaKey
     ) {
       return;
     }
 
     e.preventDefault();
-    this.props.push(this.props.to);
+    this.props.push(this.props.href);
   }
 }
 
-export const Link = connect<void, {}, LinkProps>(
+export const Anchor = connect<void, {}, AnchorProps>(
   null,
-  (dispatch: Dispatch<any>, props: LinkProps): any => {
+  (dispatch: Dispatch<any>, props: AnchorProps): any => {
     return {
-      push: (pathname: string) => dispatch(push(pathname)),
+      push: (pathname: string) => dispatch(hist.push(pathname)),
     };
   },
-)(LinkBase);
+)(AnchorBase);
