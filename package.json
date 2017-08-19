@@ -13,9 +13,10 @@
   "scripts": {
     "lint": "./node_modules/.bin/tslint ./src/*.ts ./src/*.tsx ./test/*.tsx",
     "build": "./node_modules/.bin/tsc -p .",
-    "pretest": "./node_modules/.bin/tsc --target es6 --module commonjs --jsx react ./test/*.tsx",
+    "pretest": "./node_modules/.bin/tsc -p ./test",
     "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha ./test/*.js",
-    "posttest": "nyc report --reporter=json && codecov -f coverage/*.json",
+    "posttest": "nyc report --reporter=json && if [ \"$CI\" = \"true\" ]; then npm run codecov; fi",
+    "codecov": "codecov -f coverage/*.json",
     "update": "npm uninstall --save redux-hist && npm install --save redux-hist"
   },
   "repository": {
@@ -45,6 +46,7 @@
     "@types/enzyme": "^2.8.4",
     "@types/history": "^4.6.0",
     "@types/mocha": "^2.2.41",
+    "@types/power-assert": "^1.4.29",
     "@types/react": "^15.0.38",
     "@types/react-redux": "^4.4.46",
     "@types/redux-actions": "^1.2.6",
