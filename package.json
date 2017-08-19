@@ -15,7 +15,7 @@
     "build": "./node_modules/.bin/tsc -p .",
     "pretest": "./node_modules/.bin/tsc --target es6 --module commonjs --jsx react ./test/*.tsx",
     "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha ./test/*.js",
-    "posttest": "nyc report --reporter=json && if [ \"$CI\" = \"true\" ]; then codecov -f coverage/*.json; fi",
+    "posttest": "nyc report --reporter=json && codecov -f coverage/*.json",
     "update": "npm uninstall --save redux-hist && npm install --save redux-hist"
   },
   "repository": {
