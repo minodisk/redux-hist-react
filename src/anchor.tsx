@@ -16,33 +16,41 @@ class AnchorBase extends React.Component<AnchorProps, {}> {
     } = this.props;
     return (
       <a
-        onClick={(onClick != null) ? onClick : this.onClick}
+        onClick={this.onClick}
         {...props}
       >{this.props.children}</a>
     );
   }
 
   private onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (this.props.onClick != null) {
+      this.props.onClick(e);
+    }
+
     if (
-      this.props.target ||
       e.defaultPrevented ||
-      e.button > 0 ||
       e.altKey ||
       e.ctrlKey ||
       e.shiftKey ||
-      e.metaKey
+      e.metaKey ||
+      (e.button != null && e.button !== 0) ||
+      (this.props.target != null && this.props.target !== "_self")
     ) {
       return;
     }
 
     e.preventDefault();
+
+    if (this.props.push == null || this.props.href == null) {
+      return;
+    }
     this.props.push(this.props.href);
   }
 }
 
 export const Anchor = connect<void, {}, AnchorProps>(
   null,
-  (dispatch: Dispatch<any>, props: AnchorProps): any => {
+  (dispatch: Dispatch<any>): any => {
     return {
       push: (pathname: string) => dispatch(hist.push(pathname)),
     };

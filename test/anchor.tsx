@@ -11,7 +11,7 @@ import {push} from "redux-hist";
 import configureStore from "redux-mock-store";
 import {spy} from "sinon";
 
-import {Anchor} from "../lib";
+import {Anchor} from "../src-dist";
 
 const mockStore = configureStore();
 
@@ -46,18 +46,114 @@ describe("<Anchor>", () => {
       deepStrictEqual(store.getActions(), [push("/foo")]);
     });
 
-    it("should be overwritten by onClick prop", () => {
+    it("should call onClick prop and dispatch push action", () => {
       const onClick = spy();
       const store = mockStore();
       const wrapper = mount(
         <Provider store={store}>
           <Anchor
+            href="/foo"
             onClick={onClick}
           />
         </Provider>,
       );
       wrapper.find("a").simulate("click");
       strictEqual(onClick.callCount, 1);
+      deepStrictEqual(store.getActions(), [push("/foo")]);
+    });
+
+    it("shouldn't dispatch push action when the event has been prevented by onClick prop", () => {
+      const store = mockStore();
+      const wrapper = mount(
+        <Provider store={store}>
+          <Anchor
+            href="/foo"
+            onClick={(e) => e.preventDefault()}
+          />
+        </Provider>,
+      );
+      wrapper.find("a").simulate("click");
+      deepStrictEqual(store.getActions(), []);
+    });
+
+    it("shouldn't dispatch push action with any meta key", () => {
+      const store = mockStore();
+      const wrapper = mount(
+        <Provider store={store}>
+          <Anchor
+            href="/foo"
+          />
+        </Provider>,
+      );
+      const a = wrapper.find("a");
+      [
+        {altKey: true},
+        {ctrlKey: true},
+        {shiftKey: true},
+        {metaKey: true},
+      ].forEach((data) => {
+        a.simulate("click", data);
+        deepStrictEqual(store.getActions(), []);
+      })
+    });
+
+    it("shouldn't dispatch push action without main button", () => {
+      const store = mockStore();
+      const wrapper = mount(
+        <Provider store={store}>
+          <Anchor
+            href="/foo"
+          />
+        </Provider>,
+      );
+      const a = wrapper.find("a");
+      [
+        {button: 1},
+        {button: 2},
+        {button: 3},
+        {button: 4},
+      ].forEach((data) => {
+        a.simulate("click", data);
+        deepStrictEqual(store.getActions(), []);
+      })
+    });
+
+    it("should dispatch push action when target prop is _self", () => {
+      const store = mockStore();
+      const wrapper = mount(
+        <Provider store={store}>
+          <Anchor
+            href="/foo"
+            target="_self"
+          />
+        </Provider>,
+      );
+      wrapper.find("a").simulate("click");
+      deepStrictEqual(store.getActions(), [push("/foo")]);
+    });
+
+    it("shouldn't dispatch push action when target prop isn't _self", () => {
+      const store = mockStore();
+      const wrapper = mount(
+        <Provider store={store}>
+          <Anchor
+            href="/foo"
+            target="_blank"
+          />
+        </Provider>,
+      );
+      wrapper.find("a").simulate("click");
+      deepStrictEqual(store.getActions(), []);
+    });
+
+    it("shouldn't dispatch push action without href prop", () => {
+      const store = mockStore();
+      const wrapper = mount(
+        <Provider store={store}>
+          <Anchor />
+        </Provider>,
+      );
+      wrapper.find("a").simulate("click");
       deepStrictEqual(store.getActions(), []);
     });
 

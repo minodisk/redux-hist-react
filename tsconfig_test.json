@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "outDir": ".",
-    "target": "es6",
+    "jsx": "react",
     "module": "commonjs",
     "noImplicitAny": true,
-    "jsx": "react"
+    "outDir": "./test-dist",
+    "sourceMap": true,
+    "target": "es6"
   },
   "include": [
-    "./**/*.tsx"
+    "test/**/*.ts",
+    "test/**/*.tsx"
   ],
   "exclude": [
     "node_modules"
