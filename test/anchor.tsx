@@ -94,7 +94,7 @@ describe("<Anchor>", () => {
       ].forEach((data) => {
         a.simulate("click", data);
         deepStrictEqual(store.getActions(), []);
-      })
+      });
     });
 
     it("shouldn't dispatch push action without main button", () => {
@@ -115,7 +115,7 @@ describe("<Anchor>", () => {
       ].forEach((data) => {
         a.simulate("click", data);
         deepStrictEqual(store.getActions(), []);
-      })
+      });
     });
 
     it("should dispatch push action when target prop is _self", () => {
