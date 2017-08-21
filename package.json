@@ -16,7 +16,7 @@
     "pretest": "./node_modules/.bin/tsc -p tsconfig_test_src.json && ./node_modules/.bin/tsc -p tsconfig_test.json",
     "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha ./test-dist/*.js",
     "posttest": "nyc report --reporter=json && if [ \"$CI\" = \"true\" ]; then npm run codecov; fi && rm -rf src-dist test-dist",
-    "codecov": "codecov -f coverage/*.json",
+    "codecov": "codecov -f coverage/*.json && rm -rf .nyc_output coverage",
     "update": "npm uninstall --save redux-hist && npm install --save redux-hist"
   },
   "repository": {
@@ -64,5 +64,11 @@
     "sinon": "^3.2.1",
     "tslint": "^5.5.0",
     "typescript": "^2.4.1"
+  },
+  "nyc": {
+    "exclude": [
+      "test",
+      "test-dist"
+    ]
   }
 }
