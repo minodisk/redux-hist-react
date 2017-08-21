@@ -3,11 +3,11 @@
     "declaration": true,
     "jsx": "react",
     "module": "commonjs",
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "./src-dist",
     "sourceMap": true,
+    "strict": true,
     "target": "es6"
   },
   "include": [

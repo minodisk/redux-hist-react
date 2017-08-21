@@ -2,9 +2,11 @@
   "compilerOptions": {
     "jsx": "react",
     "module": "commonjs",
-    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "./test-dist",
     "sourceMap": true,
+    "strict": true,
     "target": "es6"
   },
   "include": [

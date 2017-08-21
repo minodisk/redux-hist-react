@@ -3,8 +3,10 @@
     "declaration": true,
     "jsx": "react",
     "module": "commonjs",
-    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "./lib",
+    "strict": true,
     "target": "es6"
   },
   "include": [
