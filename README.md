@@ -6,10 +6,13 @@ React Components for Redux around History API.
 
 ## API Reference
 
-### React Components
+### `<Anchor>`
 
-#### `<Link>`
-##### `to: string`
+#### `href: string`
+
+Dispatch push action.
+
+### `AnchorProps`
 
 ## Related package
 
